@@ -1,0 +1,45 @@
+﻿# Nome do workflow (aparece no GitHub Actions)
+name: CI - SystemTask
+
+# Define quando o pipeline será executado
+on:
+  # Executa quando um Pull Request é aberto ou atualizado
+  pull_request:
+    # Apenas se o PR for para a branch develop
+    branches: [ "main" ]
+
+  # Executa quando houver push direto na branch develop
+  push:
+    branches: ["feat/**", "fix/**"]
+
+# Definição dos jobs (você pode ter vários)
+jobs:
+  # Nome do job (livre)
+  build-and-test:
+    # Sistema operacional da máquina virtual
+    runs-on: ubuntu-latest
+
+    # Passos executados em sequência
+    steps:
+      # 1️ - Faz checkout do código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️ - Instala o SDK do .NET
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          # Versão do .NET que o projeto usa
+          dotnet-version: '10.0.x'
+
+      # 3️ - Restaura os pacotes NuGet
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # 4️ - Compila o projeto
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      # 5️ - Executa os testes automatizados
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
