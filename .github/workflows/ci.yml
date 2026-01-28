@@ -42,4 +42,4 @@ jobs:
 
       # 5️ - Executa os testes automatizados
       - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --configuration Release --verbosity normal
