@@ -26,6 +26,8 @@ public class TaskItem
         DueDate = ValidateDueDate(dueDate);
     }
 
+    #region Domain Rules
+
     public void ChangeStatus(StatusTask status)
     {
         if (Status == StatusTask.Completed || Status == StatusTask.Cancelled)
@@ -39,6 +41,12 @@ public class TaskItem
         if (Status != StatusTask.Pending)
             throw new InvalidOperationException("Task cannot be started");
         Status = StatusTask.InProgress;
+    }
+
+    public void OnHoldTask()
+    {
+        if (Status != StatusTask.InProgress)
+            throw new InvalidOperationException("Task cannot on hold");
     }
 
     public void CompleteTask()
@@ -65,4 +73,8 @@ public class TaskItem
         return dueDate;
 
     }
+
+    #endregion
+
+
 }
