@@ -46,7 +46,8 @@ public class TaskItem
     public void OnHoldTask()
     {
         if (Status != StatusTask.InProgress)
-            throw new InvalidOperationException("Task cannot on hold");
+            throw new InvalidOperationException("Task cannot on hold"); 
+        Status = StatusTask.OnHold;
     }
 
     public void CompleteTask()
