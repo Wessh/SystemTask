@@ -10,7 +10,7 @@ on:
 
   # Executa quando houver push direto na branch develop
   push:
-    branches: ["feat/**", "fix/**"]
+    branches: ["feat/**", "fix/**", "test/**", "docs/**", "chore/**"]
 
 # Definição dos jobs (você pode ter vários)
 jobs:
