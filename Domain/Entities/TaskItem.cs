@@ -5,8 +5,8 @@ namespace Domain.Entities;
 public class TaskItem
 {
     public Guid Id { get; init; }
-    public string Title { get; private set; }
-    public string Description { get; private set; }
+    public string? Title { get; private set; }
+    public string? Description { get; private set; }
     public StatusTask Status { get; private set; }
     public DateTime DueDate { get; private set; }
     public DateTime CreatedAt { get; private set; }
