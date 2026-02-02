@@ -178,7 +178,6 @@ namespace Application.Tests
             // Assert
             Assert.Equal(StatusTask.OnHold, result.Status);
             _repositoryMock.Verify(r => r.UpdateAsync(taskItem), Times.Exactly(2));
-            var x = 1;
         }
         #endregion
 
