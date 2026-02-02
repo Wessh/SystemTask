@@ -20,7 +20,7 @@ public interface ITaskItemService
     /// Obtém tarefas pelo Status informado.
     /// </summary>
     /// <param name="status">Status da tarefa (InProgress, Completed, etc.).</param>
-    /// <returns>Lista de DTOs das tarefas encontradas.</returns>
+    /// <returns>Lista de DTOs das tarefas encontradas ou uma lista vazia.</returns>
     public Task<IEnumerable<TaskItemDto>> GetByStatusAsync(StatusTask status);
 
     /// <summary>
