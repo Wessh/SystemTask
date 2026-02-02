@@ -1,14 +1,9 @@
 ﻿using Application.Dtos;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Helper
 {
-    internal static class TaskItemMapper
+    public static class TaskItemMapper
     {
         public static TaskItemDto ToDto(TaskItem taskItem) =>
             new TaskItemDto(
