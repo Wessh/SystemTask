@@ -1,13 +1,22 @@
+using Application.Interfaces;
+using Application.Services;
 using Infrastructure.Data;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<ITaskItemRepository, TaskItemRepository>();
+builder.Services.AddScoped<ITaskItemService, TaskItemService>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options => { 
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); 
+    });
 
-builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlite("Data Source: App.db"));
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -15,7 +15,7 @@ public interface ITaskItemService
     /// </summary>
     /// <param name="id">Identificador da tarefa.</param>
     /// <returns>Retorna um DTO de tarefa ou null se não encontrar nada.</returns>
-    public Task<TaskItemDto> GetByIdAsync(Guid id);
+    public Task<TaskItemDto?> GetByIdAsync(Guid id);
     /// <summary>
     /// Obtém tarefas pelo Status informado.
     /// </summary>
