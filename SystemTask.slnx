@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="Api.Tests/Api.Tests.csproj" Id="fd290266-e910-446e-85b4-9a92a076a61e" />
   <Project Path="Api/Api.csproj" Id="6c45e3bd-f35a-4ac5-a724-e8b1b3ac185a" />
   <Project Path="Application.Tests/Application.Tests.csproj" Id="a439219a-711c-4460-b6d4-6befba8ba61c" />
   <Project Path="Application/Application.csproj" Id="ff92db64-edb6-4767-84b1-215e28b0be39" />
