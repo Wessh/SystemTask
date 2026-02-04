@@ -82,10 +82,10 @@ namespace Application.Tests
             _repositoryMock.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((TaskItem?)null);
 
             // Act
-            var taskException = () => _service.GetByIdAsync(id);
+            var result = await _service.GetByIdAsync(id);
 
             // Assert
-            await Assert.ThrowsAsync<KeyNotFoundException>(taskException);
+            Assert.Null(result);
         }
 
         [Fact]
