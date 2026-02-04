@@ -28,12 +28,15 @@ namespace Application.Services
             return TaskItemMapper.ToDto(taskItem);
         }
 
-        public async Task<TaskItemDto> GetByIdAsync(Guid id)
+        public async Task<TaskItemDto?> GetByIdAsync(Guid id)
         {
             if(id == Guid.Empty)
                 throw new ArgumentException("Id da tarefa não pode ser vazio.", nameof(id));
 
-            var taskItem = await _repository.GetByIdAsync(id) ?? throw new KeyNotFoundException($"Tarefa com id {id} não encontrada.");
+            var taskItem = await _repository.GetByIdAsync(id);
+            
+            if (taskItem is null)
+                return null;
 
             return TaskItemMapper.ToDto(taskItem);
         }
