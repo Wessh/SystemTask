@@ -67,14 +67,13 @@ namespace Api.Tests
         [Fact]
         public async Task Create_ReturnsCreated_WhenValidData()
         {
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, Converters = { new JsonStringEnumConverter() } };
             var dto = new { Title = "Nova tarefa", Description = "Descrição da tarefa", DueDate = DateTime.UtcNow.AddDays(1) };
 
             var response = await _client.PostAsJsonAsync("/api/taskitem/create", dto);
 
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-            var created = await response.Content.ReadFromJsonAsync<TaskItemDto>(
-                new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } }
-                );
+            var created = await response.Content.ReadFromJsonAsync<TaskItemDto>(options);
 
             Assert.Equal("Nova tarefa", created!.Title);
         }
