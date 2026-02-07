@@ -18,7 +18,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<TaskItemDto>> Post([FromBody] CreateTaskItemDto dto) 
+        public async Task<ActionResult<TaskItemDto>> Create([FromBody] CreateTaskItemDto dto) 
         {
             if (dto.Title is null)
                 return BadRequest("Title não pode ser nulo.");
@@ -34,7 +34,6 @@ namespace Api.Controllers
         }
 
         [HttpGet("{id}")]
-        
         public async Task<ActionResult<TaskItemDto>> GetById(Guid id)
         {
             var taskItem = await _service.GetByIdAsync(id);

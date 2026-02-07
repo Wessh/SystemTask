@@ -25,7 +25,7 @@ namespace Application.Tests
         public async Task AddAsync_ShouldThrow_WhenTitleIsEmpty()
         {
             // Arrange
-            var taskItem = new CreateTaskItemDto("", "Description", DateTime.UtcNow.AddDays(1));
+            var taskItem = new CreateTaskItemDto {Title = "", Description = "Description" , DueDate = DateTime.UtcNow.AddDays(1) };
 
             // Act
             var taskException = () => _service.AddAsync(taskItem);
@@ -38,7 +38,7 @@ namespace Application.Tests
         public async Task AddAsync_ShouldThrow_WhenDueDateIsPast()
         {
             // Arrange
-            var taskItem = new CreateTaskItemDto("Title", "Description", DateTime.UtcNow.AddDays(-1));
+            var taskItem = new CreateTaskItemDto {Title = "Title", Description = "Description", DueDate = DateTime.UtcNow.AddDays(-1) };
 
             // Act
             var taskException = () => _service.AddAsync(taskItem);
@@ -51,7 +51,7 @@ namespace Application.Tests
         public async Task AddAsync_ShouldReturnDto_WhenValid()
         {
             // Arrange
-            var dto = new CreateTaskItemDto("Title", "Description", DateTime.UtcNow.AddDays(1));
+            var dto = new CreateTaskItemDto {Title = "Title", Description = "Description", DueDate = DateTime.UtcNow.AddDays(1) };
 
             // Act
             var result = await _service.AddAsync(dto);
