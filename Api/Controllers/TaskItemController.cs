@@ -17,6 +17,11 @@ namespace Api.Controllers
             _service = service;
         }
 
+        /// <summary> 
+        /// Cria uma nova tarefa. 
+        /// </summary> 
+        /// <param name="dto">Dados da tarefa a ser criada.</param> 
+        /// <returns>Retorna a tarefa criada.</returns>
         [HttpPost("create")]
         public async Task<ActionResult<TaskItemDto>> Create([FromBody] CreateTaskItemDto dto) 
         {
@@ -33,6 +38,11 @@ namespace Api.Controllers
             return CreatedAtAction(nameof(GetById), new {id = taskItem.Id }, taskItem);
         }
 
+        /// <summary> 
+        /// Busca uma tarefa pelo ID. 
+        /// </summary> 
+        /// <param name="id">Identificador único da tarefa.</param> 
+        /// <returns>Retorna a tarefa encontrada ou 404 se não existir.</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<TaskItemDto>> GetById(Guid id)
         {
@@ -45,6 +55,11 @@ namespace Api.Controllers
                 return Ok(taskItem);
         }
 
+        /// <summary> 
+        /// Busca tarefas pelo Status. 
+        /// </summary> 
+        /// <param name="status">Status desejado para busca.</param> 
+        /// <returns>Retorna a tarefa encontrada ou 404 se não existir.</returns>
         [HttpGet("status/{status}")]
         public async Task<ActionResult<IEnumerable<TaskItemDto>>> GetByStatus(StatusTask status)
         {
@@ -52,6 +67,16 @@ namespace Api.Controllers
             return Ok(taskItems);
         }
 
+        /// <summary> 
+        /// Inicia a execução de uma tarefa existente. 
+        /// </summary> 
+        /// <param name="id">Identificador único da tarefa que será iniciada.</param> 
+        /// <returns> 
+        /// Retorna: 
+        /// - 400 Bad Request se o <paramref name="id"/> não for informado (Guid.Empty); 
+        /// - 404 Not Found se a tarefa não existir; 
+        /// - 200 OK com os dados da tarefa atualizada quando a operação for bem-sucedida. 
+        /// </returns>
         [HttpPut("{id}/start")]
         public async Task<ActionResult> Start(Guid id)
         {
@@ -64,6 +89,16 @@ namespace Api.Controllers
             return Ok(taskItem);
         }
 
+        /// <summary> 
+        /// Pausa a execução de uma tarefa existente. 
+        /// </summary> 
+        /// <param name="id">Identificador único da tarefa que será pausada.</param> 
+        /// <returns> 
+        /// Retorna: 
+        /// - 400 Bad Request se o <paramref name="id"/> não for informado (Guid.Empty); 
+        /// - 404 Not Found se a tarefa não existir; 
+        /// - 200 OK com os dados da tarefa atualizada quando a operação for bem-sucedida. 
+        /// </returns>
         [HttpPut("{id}/on-hold")]
         public async Task<ActionResult> OnHold(Guid id)
         {
@@ -76,6 +111,16 @@ namespace Api.Controllers
             return Ok(taskItem);
         }
 
+        /// <summary> 
+        /// Completa uma tarefa existente. 
+        /// </summary> 
+        /// <param name="id">Identificador único da tarefa que será concluida.</param> 
+        /// <returns> 
+        /// Retorna: 
+        /// - 400 Bad Request se o <paramref name="id"/> não for informado (Guid.Empty); 
+        /// - 404 Not Found se a tarefa não existir; 
+        /// - 200 OK com os dados da tarefa atualizada quando a operação for bem-sucedida. 
+        /// </returns>
         [HttpPut("{id}/complete")]
         public async Task<ActionResult> Complete(Guid id)
         {
@@ -88,6 +133,16 @@ namespace Api.Controllers
             return Ok(taskItem);
         }
 
+        /// <summary> 
+        /// Cancela uma tarefa existente. 
+        /// </summary> 
+        /// <param name="id">Identificador único da tarefa que será cancelada.</param> 
+        /// <returns> 
+        /// Retorna: 
+        /// - 400 Bad Request se o <paramref name="id"/> não for informado (Guid.Empty); 
+        /// - 404 Not Found se a tarefa não existir; 
+        /// - 200 OK com os dados da tarefa atualizada quando a operação for bem-sucedida. 
+        /// </returns>
         [HttpPut("{id}/cancel")]
         public async Task<ActionResult> Cancel(Guid id)
         {
