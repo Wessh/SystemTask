@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Api.Middlewares;
+using Application.Interfaces;
 using Application.Services;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
@@ -54,6 +55,9 @@ public class Program
 
 
         var app = builder.Build();
+
+        // Middleware de tratamento global de exceções
+        app.UseMiddleware<ExceptionMiddleware>();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

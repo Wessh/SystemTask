@@ -80,12 +80,7 @@ namespace Api.Controllers
         [HttpPut("{id}/start")]
         public async Task<ActionResult> Start(Guid id)
         {
-            if (id == Guid.Empty)
-                return BadRequest("Id não informado");
-
             var taskItem = await _service.StartAsync(id);
-            if(taskItem is null)
-                return NotFound($"Id {id}, não encontrado!");
             return Ok(taskItem);
         }
 
@@ -102,12 +97,8 @@ namespace Api.Controllers
         [HttpPut("{id}/on-hold")]
         public async Task<ActionResult> OnHold(Guid id)
         {
-            if (id == Guid.Empty)
-                return BadRequest("Id não informado");
-
             var taskItem = await _service.OnHoldAsync(id);
-            if (taskItem is null)
-                return NotFound($"Id {id}, não encontrado!");
+
             return Ok(taskItem);
         }
 
@@ -124,12 +115,7 @@ namespace Api.Controllers
         [HttpPut("{id}/complete")]
         public async Task<ActionResult> Complete(Guid id)
         {
-            if (id == Guid.Empty)
-                return BadRequest("Id não informado");
-
             var taskItem = await _service.CompleteAsync(id);
-            if (taskItem is null)
-                return NotFound($"Id {id}, não encontrado!");
             return Ok(taskItem);
         }
 
@@ -146,12 +132,7 @@ namespace Api.Controllers
         [HttpPut("{id}/cancel")]
         public async Task<ActionResult> Cancel(Guid id)
         {
-            if (id == Guid.Empty)
-                return BadRequest("Id não informado");
-
             var taskItem = await _service.CancelAsync(id);
-            if (taskItem is null)
-                return NotFound($"Id {id}, não encontrado!");
             return Ok(taskItem);
         }
 
