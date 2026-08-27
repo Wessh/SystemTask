@@ -102,6 +102,24 @@ namespace Domain.Tests.Entities
             var exception = Assert.Throws<InvalidOperationException>(() => act());
             Assert.Equal("Task cannot be started", exception.Message);
         }
+
+        [Fact]
+        public void StartTask_WhenTaskIsOnHold_ShouldSetTaskToInProgress()
+        {
+            // Arrange
+            var newTask = new TaskItem(
+                title: "Title",
+                description: "Description",
+                dueDate: DateTime.UtcNow.AddDays(2));
+
+            // Act
+            newTask.StartTask();
+            newTask.OnHoldTask();
+            newTask.StartTask();
+
+            // Asserts
+            Assert.Equal(StatusTask.InProgress, newTask.Status);
+        }
         #endregion
 
         #region OnHoldTask Tests
