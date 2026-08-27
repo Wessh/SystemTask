@@ -38,7 +38,7 @@ public class TaskItem
 
     public void StartTask()
     {
-        if (Status != StatusTask.Pending)
+        if (Status != StatusTask.Pending && Status != StatusTask.OnHold)
             throw new InvalidOperationException("Task cannot be started");
         Status = StatusTask.InProgress;
     }
