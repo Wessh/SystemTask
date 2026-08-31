@@ -35,6 +35,7 @@ namespace Infrastructure.Repositories
         {
             var tasksByStatus = await _dbContext.TaskItems
                 .Where(taskItem => status == taskItem.Status)
+                .AsNoTracking()
                 .ToListAsync();
 
             return tasksByStatus;
